@@ -88,15 +88,16 @@ export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) 
   };
 
   return (
-    <header className="glass-nav" style={{
+    <header style={{
       position: 'sticky',
       top: 0,
-      zIndex: 100,
-      transition: 'all 0.3s ease',
+      zIndex: 1000,
+      width: '100%',
+      transition: 'box-shadow 0.3s ease',
       boxShadow: scrolled ? '0 10px 30px rgba(15, 23, 42, 0.08)' : 'none'
     }}>
       {/* Main Header Bar */}
-      <div style={{
+      <div className="glass-nav" style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -320,9 +321,12 @@ export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) 
           left: 0,
           right: 0,
           bottom: 0,
+          width: '100%',
+          height: 'calc(100dvh - 75px)',
           backgroundColor: 'rgba(15, 23, 42, 0.65)',
           backdropFilter: 'blur(6px)',
-          zIndex: 99,
+          WebkitBackdropFilter: 'blur(6px)',
+          zIndex: 9999,
           display: 'flex',
           flexDirection: 'column',
           animation: 'fadeIn 0.2s ease-out'
@@ -331,7 +335,7 @@ export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) 
           <div style={{
             backgroundColor: '#ffffff',
             borderBottom: '2px solid #e2e8f0',
-            maxHeight: 'calc(100vh - 85px)',
+            maxHeight: 'calc(100dvh - 85px)',
             overflowY: 'auto',
             padding: '1.5rem',
             boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
