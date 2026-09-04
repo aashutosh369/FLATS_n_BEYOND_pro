@@ -37,7 +37,7 @@ export default function HeroSection({ onSearchSubmit }) {
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Auto-scroll images every 4 seconds
+  // Auto-scroll images every 4.5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -51,16 +51,17 @@ export default function HeroSection({ onSearchSubmit }) {
         position: 'relative',
         height: 'calc(100vh - 75px)',
         minHeight: '580px',
-        maxHeight: '750px',
+        maxHeight: '820px',
         width: '100%',
         overflow: 'hidden',
         backgroundColor: '#090d16',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding: '2rem 0'
       }}
     >
-      {/* 5 Background Image Slides with Smooth Fade */}
+      {/* Background Image Slides with Smooth Fade */}
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -98,13 +99,13 @@ export default function HeroSection({ onSearchSubmit }) {
               left: 0,
               right: 0,
               bottom: 0,
-              background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.25) 50%, rgba(15, 23, 42, 0.65) 100%)'
+              background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.28) 50%, rgba(15, 23, 42, 0.72) 100%)'
             }}
           />
         </div>
       ))}
 
-      {/* Foreground Content */}
+      {/* Foreground Content - Perfectly Vertically Centered */}
       <div
         className="container"
         style={{
@@ -112,21 +113,25 @@ export default function HeroSection({ onSearchSubmit }) {
           zIndex: 10,
           textAlign: 'center',
           color: '#ffffff',
-          paddingTop: '2rem'
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         {/* Dynamic Titles for each Slide */}
-        <div style={{ minHeight: '140px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div style={{ maxWidth: '850px', margin: '0 auto' }}>
           <h1
             key={`title-${currentSlide}`}
             style={{
-              fontSize: 'clamp(2.4rem, 5.5vw, 4.4rem)',
+              fontSize: 'clamp(2.1rem, 5vw, 4.2rem)',
               fontWeight: 800,
               color: '#ffffff',
               letterSpacing: '-0.02em',
               lineHeight: 1.15,
-              marginBottom: '0.75rem',
-              textShadow: '0 4px 20px rgba(0, 0, 0, 0.6)',
+              marginBottom: '0.85rem',
+              textShadow: '0 4px 20px rgba(0, 0, 0, 0.7)',
               animation: 'fadeIn 0.6s ease-out'
             }}
           >
@@ -136,13 +141,14 @@ export default function HeroSection({ onSearchSubmit }) {
           <p
             key={`sub-${currentSlide}`}
             style={{
-              fontSize: 'clamp(1.05rem, 2vw, 1.35rem)',
+              fontSize: 'clamp(1rem, 1.8vw, 1.3rem)',
               color: 'rgba(255, 255, 255, 0.95)',
               fontWeight: 400,
               maxWidth: '680px',
-              margin: '0 auto 2.5rem',
+              margin: '0 auto 2.2rem auto',
               textShadow: '0 2px 10px rgba(0, 0, 0, 0.7)',
-              animation: 'fadeIn 0.8s ease-out'
+              animation: 'fadeIn 0.8s ease-out',
+              lineHeight: 1.5
             }}
           >
             {slides[currentSlide].subtitle}
@@ -150,23 +156,24 @@ export default function HeroSection({ onSearchSubmit }) {
         </div>
 
         {/* Openhouse Capsule Search Bar */}
-        <div style={{ marginTop: '1rem', marginBottom: '2.5rem' }}>
+        <div style={{ width: '100%', maxWidth: '780px', margin: '0 auto 1.8rem auto' }}>
           <SearchBar onSearchSubmit={onSearchSubmit} />
         </div>
 
-        {/* Slide Indicators (Openhouse dots/lines at the bottom of hero) */}
+        {/* Slide Indicators */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '0.6rem',
-            marginTop: '1.5rem'
+            gap: '0.5rem',
+            marginTop: '0.5rem'
           }}
         >
           {slides.map((_, idx) => (
             <button
               key={idx}
+              aria-label={`Go to slide ${idx + 1}`}
               onClick={() => setCurrentSlide(idx)}
               style={{
                 height: '5px',
@@ -184,3 +191,5 @@ export default function HeroSection({ onSearchSubmit }) {
     </section>
   );
 }
+
+

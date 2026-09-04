@@ -49,12 +49,12 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
   });
 
   return (
-    <section id="properties" style={{ padding: '5rem 0', backgroundColor: '#f8fafc' }}>
+    <section id="properties" style={{ padding: 'clamp(3rem, 6vw, 5rem) 0', backgroundColor: '#f8fafc' }}>
       <div className="container">
         {/* Section Header - Perfectly Centered */}
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 2.5rem' }}>
+        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto clamp(1.8rem, 4vw, 2.5rem)' }}>
           <div style={{
-            fontSize: '0.8rem',
+            fontSize: 'clamp(0.72rem, 1.2vw, 0.8rem)',
             textTransform: 'uppercase',
             letterSpacing: '0.15em',
             color: '#d97706',
@@ -70,31 +70,35 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
           }}>
             <Sparkles size={13} color="#d97706" /> Curated Real Estate Spectrum
           </div>
-          <h2 style={{ fontSize: '2.3rem', fontWeight: 800, color: '#0f172a', margin: '0.6rem 0 0.4rem', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 3.8vw, 2.3rem)', fontWeight: 800, color: '#0f172a', margin: '0.6rem 0 0.4rem', letterSpacing: '-0.02em' }}>
             Exclusive Featured Properties
           </h2>
-          <p style={{ color: '#64748b', fontSize: '1rem', marginTop: '0.25rem' }}>
+          <p style={{ color: '#64748b', fontSize: 'clamp(0.88rem, 1.5vw, 1rem)', marginTop: '0.25rem' }}>
             Showing {sortedProperties.length} verified listings across prime luxury micro-markets.
           </p>
         </div>
 
-        {/* Category Pills Switcher - Centered */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '0.6rem',
-          marginBottom: '1.5rem',
-          flexWrap: 'wrap'
-        }}>
+        {/* Category Pills Switcher */}
+        <div 
+          className="no-scrollbar"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '0.5rem',
+            marginBottom: '1.5rem',
+            flexWrap: 'wrap',
+            paddingBottom: '0.25rem'
+          }}
+        >
           {['All', 'Fresh Bookings', 'Resale', 'Sale & Purchase'].map((cat) => (
             <button
               key={cat}
               onClick={() => onSelectCategory(cat)}
               style={{
-                padding: '0.55rem 1.35rem',
+                padding: 'clamp(0.45rem, 1vw, 0.55rem) clamp(0.9rem, 2vw, 1.35rem)',
                 borderRadius: '9999px',
-                fontSize: '0.86rem',
+                fontSize: 'clamp(0.8rem, 1.2vw, 0.86rem)',
                 fontWeight: 600,
                 backgroundColor: activeCategory === cat ? '#0f172a' : '#ffffff',
                 color: activeCategory === cat ? '#ffffff' : '#475569',
@@ -110,20 +114,20 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
           ))}
         </div>
 
-        {/* Location Search & Filter Bar - Centered Card */}
+        {/* Location Search & Filter Bar */}
         <div style={{
           backgroundColor: '#ffffff',
           borderRadius: '16px',
-          padding: '1rem 1.4rem',
+          padding: 'clamp(0.85rem, 2vw, 1.25rem)',
           border: '1px solid #e2e8f0',
           boxShadow: '0 4px 18px rgba(15, 23, 42, 0.05)',
           maxWidth: '960px',
-          margin: '0 auto 3rem',
+          margin: '0 auto clamp(2rem, 4vw, 3rem)',
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '1rem'
+          gap: '0.85rem'
         }}>
           {/* Location Search Input */}
           <div style={{
@@ -131,13 +135,13 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
             alignItems: 'center',
             gap: '0.6rem',
             backgroundColor: '#f8fafc',
-            padding: '0.55rem 1rem',
+            padding: '0.55rem 0.9rem',
             borderRadius: '10px',
             border: '1px solid #e2e8f0',
-            flex: '1 1 280px',
-            minWidth: '240px'
+            flex: '1 1 260px',
+            minWidth: '200px'
           }}>
-            <Search size={17} color="#94a3b8" />
+            <Search size={17} color="#94a3b8" style={{ flexShrink: 0 }} />
             <input
               type="text"
               value={locationSearchQuery}
@@ -163,13 +167,14 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
           </div>
 
           {/* Quick Location Select Dropdown */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: '0 1 auto' }}>
-            <MapPin size={16} color="#d97706" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flex: '1 1 180px', minWidth: '160px' }}>
+            <MapPin size={16} color="#d97706" style={{ flexShrink: 0 }} />
             <select
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
               style={{
-                padding: '0.55rem 0.9rem',
+                width: '100%',
+                padding: '0.55rem 0.75rem',
                 borderRadius: '10px',
                 border: '1px solid #cbd5e1',
                 backgroundColor: '#ffffff',
@@ -189,14 +194,15 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
           </div>
 
           {/* Sort Selector */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: '0 1 auto' }}>
-            <SlidersHorizontal size={16} color="#64748b" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flex: '1 1 180px', minWidth: '160px' }}>
+            <SlidersHorizontal size={16} color="#64748b" style={{ flexShrink: 0 }} />
             <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600, whiteSpace: 'nowrap' }}>Sort:</span>
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
               style={{
-                padding: '0.55rem 0.9rem',
+                width: '100%',
+                padding: '0.55rem 0.75rem',
                 borderRadius: '10px',
                 border: '1px solid #cbd5e1',
                 backgroundColor: '#ffffff',
@@ -219,7 +225,7 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
           <div style={{
             backgroundColor: '#ffffff',
             borderRadius: '16px',
-            padding: '4rem 2rem',
+            padding: '3.5rem 1.5rem',
             textAlign: 'center',
             border: '1px solid #e2e8f0'
           }}>
@@ -235,8 +241,8 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
         ) : (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-            gap: '2rem'
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 330px), 1fr))',
+            gap: 'clamp(1.25rem, 3vw, 2rem)'
           }}>
             {sortedProperties.map((prop) => (
               <PropertyCard
@@ -249,11 +255,11 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
           </div>
         )}
 
-        {/* Bottom Off-Market Luxury Banner - Warm Project Gold Theme */}
+        {/* Bottom Off-Market Luxury Banner */}
         <div style={{
-          marginTop: '4rem',
+          marginTop: 'clamp(2.5rem, 5vw, 4rem)',
           borderRadius: '20px',
-          padding: '2.5rem 3rem',
+          padding: 'clamp(1.5rem, 4vw, 2.5rem) clamp(1.2rem, 4vw, 3rem)',
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
@@ -281,10 +287,10 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
             }}>
               <Sparkles size={14} color="#d97706" /> Confidential Off-Market Advisory
             </div>
-            <h3 style={{ fontSize: '1.65rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
+            <h3 style={{ fontSize: 'clamp(1.3rem, 2.5vw, 1.65rem)', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
               Looking for Ultra Luxury Estates & Penthouses?
             </h3>
-            <p style={{ color: '#475569', fontSize: '0.96rem', lineHeight: 1.6 }}>
+            <p style={{ color: '#475569', fontSize: 'clamp(0.88rem, 1.2vw, 0.96rem)', lineHeight: 1.6 }}>
               Many high-net-worth sellers require complete anonymity. Connect with our corporate director desk for private presentations.
             </p>
           </div>
@@ -296,3 +302,4 @@ export default function PropertyGridSection({ activeCategory, onSelectCategory, 
     </section>
   );
 }
+

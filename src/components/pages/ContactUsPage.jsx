@@ -216,14 +216,11 @@ export default function ContactUsPage({ onBack }) {
         </div>
       </div>
 
-      <div className="container" style={{ paddingTop: '3.5rem' }}>
+      <div className="container" style={{ paddingTop: 'clamp(2rem, 4vw, 3.5rem)' }}>
         {/* 3. Main 2-Column Grid (Form + Contact Cards) */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)',
-          gap: '2.5rem',
+        <div className="responsive-2col" style={{
           alignItems: 'start',
-          marginBottom: '4.5rem'
+          marginBottom: 'clamp(2.5rem, 5vw, 4.5rem)'
         }}>
           {/* Left Column: Form + Offices Map */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -231,7 +228,7 @@ export default function ContactUsPage({ onBack }) {
             <div style={{
               backgroundColor: '#ffffff',
               borderRadius: '20px',
-              padding: 'clamp(2rem, 4vw, 2.75rem)',
+              padding: 'clamp(1.25rem, 3vw, 2.75rem)',
               border: '1px solid #e2e8f0',
               boxShadow: '0 8px 25px rgba(15, 23, 42, 0.04)'
             }}>

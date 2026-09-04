@@ -19,9 +19,6 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
     e.preventDefault();
     if (!formData.name || !formData.phone) return;
     setSubmitted(true);
-    setTimeout(() => {
-      // Auto close after success feedback
-    }, 4000);
   };
 
   const handleReset = () => {
@@ -42,31 +39,33 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '1rem'
+      padding: 'clamp(0.75rem, 2vw, 1.5rem)'
     }}>
       <div style={{
         backgroundColor: '#ffffff',
         borderRadius: '20px',
         maxWidth: '520px',
         width: '100%',
+        maxHeight: '92vh',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        overflow: 'hidden',
+        overflowY: 'auto',
         position: 'relative',
         animation: 'fadeIn 0.3s ease-out'
       }}>
         {/* Header */}
         <div style={{
           background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-          padding: '1.75rem 2rem',
+          padding: 'clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 2rem)',
           color: '#ffffff',
           position: 'relative'
         }}>
           <button 
             onClick={onClose}
+            aria-label="Close modal"
             style={{
               position: 'absolute',
-              top: '1.25rem',
-              right: '1.25rem',
+              top: '1rem',
+              right: '1rem',
               color: '#94a3b8',
               background: 'rgba(255, 255, 255, 0.1)',
               border: 'none',
@@ -82,32 +81,32 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
             <X size={18} />
           </button>
           
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
-            <Building size={20} color="#d97706" />
-            <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#d97706', fontWeight: 700 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
+            <Building size={18} color="#d97706" />
+            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#d97706', fontWeight: 700 }}>
               Flats n Beyond Confidential
             </span>
           </div>
 
-          <h3 style={{ fontSize: '1.4rem', color: '#ffffff', fontWeight: 700 }}>
+          <h3 style={{ fontSize: 'clamp(1.15rem, 2vw, 1.4rem)', color: '#ffffff', fontWeight: 700 }}>
             {property ? 'Request Exclusive Callback' : 'Connect with Corporate Advisory'}
           </h3>
           {property && (
-            <p style={{ fontSize: '0.85rem', color: '#cbd5e1', marginTop: '0.25rem' }}>
+            <p style={{ fontSize: '0.82rem', color: '#cbd5e1', marginTop: '0.2rem' }}>
               Listing: <strong style={{ color: '#ffffff' }}>{property.title}</strong>
             </p>
           )}
         </div>
 
         {/* Content */}
-        <div style={{ padding: '2rem' }}>
+        <div style={{ padding: 'clamp(1.25rem, 3vw, 2rem)' }}>
           {submitted ? (
-            <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
-              <CheckCircle2 size={56} color="#0d9488" style={{ margin: '0 auto 1rem' }} />
-              <h4 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>
+            <div style={{ textAlign: 'center', padding: '1.5rem 0.5rem' }}>
+              <CheckCircle2 size={52} color="#0d9488" style={{ margin: '0 auto 1rem' }} />
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>
                 Enquiry Successfully Logged!
               </h4>
-              <p style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
+              <p style={{ color: '#64748b', fontSize: '0.92rem', marginBottom: '1.5rem' }}>
                 Our corporate real estate advisor will get in touch with you shortly on <strong>{formData.phone}</strong>.
               </p>
               <div style={{
@@ -130,9 +129,9 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
               </Button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#334155', marginBottom: '0.4rem' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#334155', marginBottom: '0.35rem' }}>
                   Full Name *
                 </label>
                 <input
@@ -143,18 +142,18 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   style={{
                     width: '100%',
-                    padding: '0.75rem 1rem',
+                    padding: '0.7rem 0.9rem',
                     borderRadius: '10px',
                     border: '1px solid #cbd5e1',
-                    fontSize: '0.95rem',
+                    fontSize: '0.92rem',
                     outline: 'none'
                   }}
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#334155', marginBottom: '0.4rem' }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#334155', marginBottom: '0.35rem' }}>
                     Phone Number *
                   </label>
                   <input
@@ -165,17 +164,17 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     style={{
                       width: '100%',
-                      padding: '0.75rem 1rem',
+                      padding: '0.7rem 0.9rem',
                       borderRadius: '10px',
                       border: '1px solid #cbd5e1',
-                      fontSize: '0.95rem',
+                      fontSize: '0.92rem',
                       outline: 'none'
                     }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#334155', marginBottom: '0.4rem' }}>
+                  <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#334155', marginBottom: '0.35rem' }}>
                     Email Address
                   </label>
                   <input
@@ -185,10 +184,10 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     style={{
                       width: '100%',
-                      padding: '0.75rem 1rem',
+                      padding: '0.7rem 0.9rem',
                       borderRadius: '10px',
                       border: '1px solid #cbd5e1',
-                      fontSize: '0.95rem',
+                      fontSize: '0.92rem',
                       outline: 'none'
                     }}
                   />
@@ -196,7 +195,7 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#334155', marginBottom: '0.4rem' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#334155', marginBottom: '0.35rem' }}>
                   Target Investment Range
                 </label>
                 <select
@@ -204,10 +203,10 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
                   onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                   style={{
                     width: '100%',
-                    padding: '0.75rem 1rem',
+                    padding: '0.7rem 0.9rem',
                     borderRadius: '10px',
                     border: '1px solid #cbd5e1',
-                    fontSize: '0.95rem',
+                    fontSize: '0.92rem',
                     backgroundColor: '#ffffff',
                     outline: 'none'
                   }}
@@ -221,7 +220,7 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#334155', marginBottom: '0.4rem' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#334155', marginBottom: '0.35rem' }}>
                   Specific Requirements (Optional)
                 </label>
                 <textarea
@@ -231,10 +230,10 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   style={{
                     width: '100%',
-                    padding: '0.75rem 1rem',
+                    padding: '0.7rem 0.9rem',
                     borderRadius: '10px',
                     border: '1px solid #cbd5e1',
-                    fontSize: '0.9rem',
+                    fontSize: '0.88rem',
                     fontFamily: 'inherit',
                     outline: 'none'
                   }}
@@ -248,7 +247,7 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
                 fontSize: '0.75rem',
                 color: '#64748b'
               }}>
-                <ShieldCheck size={14} color="#0d9488" />
+                <ShieldCheck size={14} color="#0d9488" style={{ flexShrink: 0 }} />
                 <span>Your information is protected under corporate anonymity standards.</span>
               </div>
 
@@ -262,3 +261,4 @@ export default function InquiryModal({ isOpen, onClose, property = null }) {
     </div>
   );
 }
+

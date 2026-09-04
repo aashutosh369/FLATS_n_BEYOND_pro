@@ -1,6 +1,5 @@
 import React from 'react';
-import { Sparkles, Key, RefreshCw, Home, Compass, ArrowRight } from 'lucide-react';
-import Button from '../common/Button';
+import { Sparkles, Key, RefreshCw, Home, ArrowRight } from 'lucide-react';
 
 export default function ServicesSection({ onSelectVertical, onOpenInquiry }) {
   const verticals = [
@@ -47,12 +46,12 @@ export default function ServicesSection({ onSelectVertical, onOpenInquiry }) {
   ];
 
   return (
-    <section id="services" style={{ padding: '5rem 0', backgroundColor: '#ffffff' }}>
+    <section id="services" style={{ padding: 'clamp(3rem, 6vw, 5rem) 0', backgroundColor: '#ffffff' }}>
       <div className="container">
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 3.5rem' }}>
+        <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto clamp(2rem, 4vw, 3.5rem)' }}>
           <div style={{
-            fontSize: '0.8rem',
+            fontSize: 'clamp(0.72rem, 1.2vw, 0.8rem)',
             textTransform: 'uppercase',
             letterSpacing: '0.15em',
             color: '#d97706',
@@ -61,10 +60,10 @@ export default function ServicesSection({ onSelectVertical, onOpenInquiry }) {
           }}>
             Core Advisory Verticals
           </div>
-          <h2 style={{ fontSize: '2.4rem', fontWeight: 800, color: '#0f172a', marginBottom: '1rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 3.8vw, 2.4rem)', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem' }}>
             Structured Real Estate Services
           </h2>
-          <p style={{ color: '#64748b', fontSize: '1.05rem' }}>
+          <p style={{ color: '#64748b', fontSize: 'clamp(0.92rem, 1.5vw, 1.05rem)' }}>
             Comprehensive corporate solutions tailored for home buyers, high-net-worth investors, and luxury homeowners.
           </p>
         </div>
@@ -72,8 +71,8 @@ export default function ServicesSection({ onSelectVertical, onOpenInquiry }) {
         {/* Verticals Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
-          gap: '1.75rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 270px), 1fr))',
+          gap: 'clamp(1.2rem, 2.5vw, 1.75rem)'
         }}>
           {verticals.map((v) => {
             const Icon = v.icon;
@@ -83,7 +82,7 @@ export default function ServicesSection({ onSelectVertical, onOpenInquiry }) {
                 style={{
                   backgroundColor: '#ffffff',
                   borderRadius: '16px',
-                  padding: '2rem',
+                  padding: 'clamp(1.4rem, 2.5vw, 2rem)',
                   border: '1px solid #e2e8f0',
                   boxShadow: '0 4px 20px rgba(15, 23, 42, 0.05)',
                   transition: 'all 0.3s ease',
@@ -104,8 +103,8 @@ export default function ServicesSection({ onSelectVertical, onOpenInquiry }) {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
                   <div style={{
-                    width: '52px',
-                    height: '52px',
+                    width: '48px',
+                    height: '48px',
                     borderRadius: '12px',
                     backgroundColor: v.bgColor,
                     color: v.accentColor,
@@ -113,7 +112,7 @@ export default function ServicesSection({ onSelectVertical, onOpenInquiry }) {
                     alignItems: 'center',
                     justifyContent: 'center'
                   }}>
-                    <Icon size={26} />
+                    <Icon size={24} />
                   </div>
                   <span style={{
                     fontSize: '0.72rem',
@@ -130,7 +129,7 @@ export default function ServicesSection({ onSelectVertical, onOpenInquiry }) {
                 <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: v.accentColor, fontWeight: 700, letterSpacing: '0.05em' }}>
                   {v.subtitle}
                 </div>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#0f172a', margin: '0.25rem 0 0.75rem' }}>
+                <h3 style={{ fontSize: 'clamp(1.15rem, 2vw, 1.3rem)', fontWeight: 700, color: '#0f172a', margin: '0.25rem 0 0.75rem' }}>
                   {v.title}
                 </h3>
                 <p style={{ fontSize: '0.92rem', color: '#64748b', lineHeight: 1.6, marginBottom: '1.5rem', flexGrow: 1 }}>
@@ -162,3 +161,4 @@ export default function ServicesSection({ onSelectVertical, onOpenInquiry }) {
     </section>
   );
 }
+

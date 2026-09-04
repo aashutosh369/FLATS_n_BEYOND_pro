@@ -53,13 +53,13 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
       <div style={{
         backgroundColor: '#ffffff',
         borderBottom: '1px solid #e2e8f0',
-        padding: '0.9rem 0',
+        padding: '0.75rem 0',
         position: 'sticky',
-        top: '72px',
+        top: '75px',
         zIndex: 40,
         boxShadow: '0 2px 10px rgba(15, 23, 42, 0.03)'
       }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
           <button
             onClick={onBack}
             style={{
@@ -88,29 +88,29 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
             <ArrowLeft size={16} /> Back
           </button>
 
-          <div style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 600 }}>
+          <div style={{ fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)', color: '#64748b', fontWeight: 600 }}>
             <span style={{ color: '#0f172a' }}>{property.bhk}</span> in <strong style={{ color: '#0f172a' }}>{property.title}</strong>, {property.location}
           </div>
         </div>
       </div>
 
-      <div className="container" style={{ paddingTop: '2rem' }}>
-        {/* 2. Gallery Section (Main Viewport + Vertical Thumbnail Strip) */}
+      <div className="container" style={{ paddingTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+        {/* 2. Responsive Gallery Section */}
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1fr) 110px',
-          gap: '1rem',
-          height: '480px',
-          marginBottom: '2rem',
-          borderRadius: '20px',
-          overflow: 'hidden'
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.85rem',
+          marginBottom: '2rem'
         }}>
           {/* Main Large Image Viewport */}
           <div style={{
             position: 'relative',
             backgroundColor: '#0f172a',
             borderRadius: '16px',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            height: 'clamp(260px, 46vw, 480px)',
+            width: '100%',
+            boxShadow: '0 8px 30px rgba(15, 23, 42, 0.12)'
           }}>
             <img
               src={currentImage.src}
@@ -123,20 +123,21 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
               }}
             />
 
-            {/* Label Tag (e.g. Living Room) */}
+            {/* Label Tag */}
             <div style={{
               position: 'absolute',
-              bottom: '1.25rem',
+              bottom: '1rem',
               left: '50%',
               transform: 'translateX(-50%)',
               backgroundColor: 'rgba(15, 23, 42, 0.85)',
               color: '#ffffff',
-              padding: '0.4rem 1.25rem',
+              padding: '0.35rem 1rem',
               borderRadius: '9999px',
-              fontSize: '0.82rem',
+              fontSize: 'clamp(0.72rem, 1.2vw, 0.82rem)',
               fontWeight: 600,
               backdropFilter: 'blur(8px)',
-              letterSpacing: '0.03em'
+              letterSpacing: '0.03em',
+              whiteSpace: 'nowrap'
             }}>
               {currentImage.label}
             </div>
@@ -144,21 +145,22 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
             {/* Prev / Next Arrows */}
             <button
               onClick={prevImage}
+              aria-label="Previous Image"
               style={{
                 position: 'absolute',
-                left: '1rem',
+                left: '0.75rem',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                width: '38px',
-                height: '38px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                backgroundColor: 'rgba(255, 255, 255, 0.92)',
                 color: '#0f172a',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
                 transition: 'all 0.2s ease'
               }}
             >
@@ -167,21 +169,22 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
 
             <button
               onClick={nextImage}
+              aria-label="Next Image"
               style={{
                 position: 'absolute',
-                right: '1rem',
+                right: '0.75rem',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                width: '38px',
-                height: '38px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                backgroundColor: 'rgba(255, 255, 255, 0.92)',
                 color: '#0f172a',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
                 transition: 'all 0.2s ease'
               }}
             >
@@ -189,26 +192,28 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
             </button>
           </div>
 
-          {/* Vertical Thumbnail Strip */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.65rem',
-            overflowY: 'auto',
-            borderRadius: '16px'
-          }}>
+          {/* Horizontal Scrollable Thumbnail Strip */}
+          <div 
+            className="no-scrollbar"
+            style={{
+              display: 'flex',
+              gap: '0.65rem',
+              overflowX: 'auto',
+              paddingBottom: '0.35rem'
+            }}
+          >
             {galleryImages.map((img, idx) => (
               <div
                 key={idx}
                 onClick={() => setActiveImageIndex(idx)}
                 style={{
-                  height: '84px',
-                  width: '100%',
+                  height: 'clamp(65px, 12vw, 85px)',
+                  width: 'clamp(90px, 16vw, 125px)',
                   borderRadius: '10px',
                   overflow: 'hidden',
                   cursor: 'pointer',
-                  border: activeImageIndex === idx ? '2.5px solid #d97706' : '1.5px solid #e2e8f0',
-                  opacity: activeImageIndex === idx ? 1 : 0.7,
+                  border: activeImageIndex === idx ? '2.5px solid #d97706' : '1.5px solid #cbd5e1',
+                  opacity: activeImageIndex === idx ? 1 : 0.65,
                   transition: 'all 0.2s ease',
                   flexShrink: 0
                 }}
@@ -223,58 +228,58 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
           </div>
         </div>
 
-        {/* 3. Main Property Overview Card (Openhouse Style) */}
+        {/* 3. Main Property Overview Card */}
         <div style={{
           backgroundColor: '#ffffff',
           borderRadius: '18px',
-          padding: '2.2rem 2.5rem',
+          padding: 'clamp(1.25rem, 3vw, 2.5rem)',
           border: '1px solid #e2e8f0',
           boxShadow: '0 4px 24px rgba(15, 23, 42, 0.05)',
           marginBottom: '2rem'
         }}>
           {/* Title & Address */}
-          <h1 style={{ fontSize: '1.9rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.4rem', letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', fontWeight: 800, color: '#0f172a', marginBottom: '0.4rem', letterSpacing: '-0.02em' }}>
             {property.title}
           </h1>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748b', fontSize: '0.92rem', marginBottom: '1.8rem' }}>
-            <MapPin size={16} color="#d97706" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#64748b', fontSize: '0.92rem', marginBottom: '1.5rem' }}>
+            <MapPin size={16} color="#d97706" style={{ flexShrink: 0 }} />
             <span>{property.location}, Gurgaon, NCR</span>
           </div>
 
           {/* Unit, Area, Price Highlight Banner */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-            gap: '1.5rem',
-            padding: '1.25rem 1.75rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+            gap: '1rem',
+            padding: 'clamp(1rem, 2vw, 1.25rem) clamp(1rem, 2vw, 1.75rem)',
             backgroundColor: '#fffdf9',
             borderRadius: '12px',
             border: '1px solid #fef3c7',
             marginBottom: '1.8rem'
           }}>
             <div>
-              <div style={{ fontSize: '0.78rem', color: '#92400e', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div style={{ fontSize: '0.75rem', color: '#92400e', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Unit Spec
               </div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#b45309' }}>
+              <div style={{ fontSize: 'clamp(1.1rem, 2vw, 1.25rem)', fontWeight: 800, color: '#b45309' }}>
                 Unit {property.unit}
               </div>
             </div>
 
             <div>
-              <div style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Super Area
               </div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a' }}>
+              <div style={{ fontSize: 'clamp(1.1rem, 2vw, 1.25rem)', fontWeight: 800, color: '#0f172a' }}>
                 {property.sqft}
               </div>
             </div>
 
             <div>
-              <div style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Advisory Price
               </div>
-              <div style={{ fontSize: '1.45rem', fontWeight: 800, color: '#d97706' }}>
+              <div style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.45rem)', fontWeight: 800, color: '#d97706' }}>
                 {property.price}
               </div>
             </div>
@@ -283,8 +288,8 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
           {/* 6 Key Specs Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-            gap: '1.25rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+            gap: '1rem',
             paddingBottom: '1.8rem',
             borderBottom: '1px solid #f1f5f9',
             marginBottom: '1.8rem'
@@ -334,7 +339,7 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
                 <Car size={18} color="#d97706" />
               </div>
               <div>
-                <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#0f172a' }}>{property.parking} Reserved (Closed)</div>
+                <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#0f172a' }}>{property.parking} Reserved</div>
                 <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Basement Parking</div>
               </div>
             </div>
@@ -344,75 +349,75 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
                 <Maximize size={18} color="#d97706" />
               </div>
               <div>
-                <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#0f172a' }}>Club & Garden View</div>
+                <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#0f172a' }}>Club & Garden</div>
                 <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Orientation</div>
               </div>
             </div>
           </div>
 
           {/* Property Scores Row */}
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: '1.8rem' }}>
             <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 700, textTransform: 'uppercase', marginBottom: '0.65rem' }}>
               Verified Property Scores
             </div>
-            <div style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap' }}>
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem',
+                gap: '0.4rem',
                 backgroundColor: '#fffbeb',
                 border: '1px solid #fde68a',
-                padding: '0.5rem 1rem',
+                padding: '0.45rem 0.85rem',
                 borderRadius: '10px',
                 color: '#92400e',
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 fontWeight: 700
               }}>
-                <Sun size={16} color="#d97706" />
+                <Sun size={15} color="#d97706" />
                 <span>Sunlight {property.sunlight}</span>
               </div>
 
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem',
+                gap: '0.4rem',
                 backgroundColor: '#eff6ff',
                 border: '1px solid #dbeafe',
-                padding: '0.5rem 1rem',
+                padding: '0.45rem 0.85rem',
                 borderRadius: '10px',
                 color: '#1e40af',
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 fontWeight: 700
               }}>
-                <Bus size={16} color="#2563eb" />
+                <Bus size={15} color="#2563eb" />
                 <span>Connectivity {property.transit}</span>
               </div>
 
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem',
+                gap: '0.4rem',
                 backgroundColor: '#f0fdf4',
                 border: '1px solid #dcfce7',
-                padding: '0.5rem 1rem',
+                padding: '0.45rem 0.85rem',
                 borderRadius: '10px',
                 color: '#166534',
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 fontWeight: 700
               }}>
-                <Building2 size={16} color="#16a34a" />
+                <Building2 size={15} color="#16a34a" />
                 <span>Locality {property.locality}</span>
               </div>
             </div>
           </div>
 
           {/* CTA Action Buttons Row */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center' }}>
             <Button
               variant="gold"
               size="lg"
               onClick={() => onOpenInquiry(property)}
-              style={{ flex: '1 1 240px', justifyContent: 'center' }}
+              style={{ flex: '1 1 220px', justifyContent: 'center' }}
             >
               <PhoneCall size={18} style={{ marginRight: '0.5rem' }} /> Schedule Callback Desk
             </Button>
@@ -421,7 +426,7 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
               variant="outline"
               size="lg"
               onClick={() => onOpenInquiry({ ...property, title: `Query: ${property.title}` })}
-              style={{ flex: '1 1 200px', justifyContent: 'center', color: '#0f172a', borderColor: '#cbd5e1' }}
+              style={{ flex: '1 1 180px', justifyContent: 'center', color: '#0f172a', borderColor: '#cbd5e1' }}
             >
               <MessageSquare size={18} style={{ marginRight: '0.5rem' }} /> Ask Your Queries
             </Button>
@@ -458,29 +463,31 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
           display: 'flex',
           backgroundColor: '#ffffff',
           borderRadius: '12px',
-          padding: '0.4rem',
+          padding: '0.35rem',
           border: '1px solid #e2e8f0',
           marginBottom: '2rem',
-          gap: '0.5rem'
+          gap: '0.35rem',
+          flexWrap: 'wrap'
         }}>
           {[
             { id: 'about-home', label: '🏠 About Home' },
-            { id: 'about-society', label: '🏢 About Society & Amenities' },
-            { id: 'tools-insights', label: '📊 Market Insights & Floor Plan' }
+            { id: 'about-society', label: '🏢 Society & Amenities' },
+            { id: 'tools-insights', label: '📊 Insights & Floor Plan' }
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               style={{
-                flex: 1,
-                padding: '0.75rem 1rem',
+                flex: '1 1 140px',
+                padding: '0.65rem 0.85rem',
                 borderRadius: '8px',
-                fontSize: '0.92rem',
+                fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)',
                 fontWeight: 700,
                 backgroundColor: activeTab === tab.id ? '#0f172a' : 'transparent',
                 color: activeTab === tab.id ? '#ffffff' : '#64748b',
                 transition: 'all 0.2s ease',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                textAlign: 'center'
               }}
             >
               {tab.label}
@@ -492,7 +499,7 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
         {activeTab === 'about-home' && (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             gap: '1.5rem',
             marginBottom: '2rem'
           }}>
@@ -500,7 +507,7 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
             <div style={{
               backgroundColor: '#ffffff',
               borderRadius: '16px',
-              padding: '2rem',
+              padding: 'clamp(1.25rem, 3vw, 2rem)',
               border: '1px solid #e2e8f0',
               boxShadow: '0 4px 18px rgba(15, 23, 42, 0.04)'
             }}>
@@ -521,7 +528,7 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
             <div style={{
               backgroundColor: '#ffffff',
               borderRadius: '16px',
-              padding: '2rem',
+              padding: 'clamp(1.25rem, 3vw, 2rem)',
               border: '1px solid #e2e8f0',
               boxShadow: '0 4px 18px rgba(15, 23, 42, 0.04)'
             }}>
@@ -557,13 +564,13 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
         <div style={{
           backgroundColor: '#ffffff',
           borderRadius: '18px',
-          padding: '2.2rem',
+          padding: 'clamp(1.25rem, 3vw, 2.2rem)',
           border: '1px solid #e2e8f0',
           boxShadow: '0 4px 18px rgba(15, 23, 42, 0.04)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0f172a' }}>
+              <h3 style={{ fontSize: 'clamp(1.15rem, 2.5vw, 1.35rem)', fontWeight: 800, color: '#0f172a' }}>
                 Area Breakdown & Spatial Architecture
               </h3>
               <p style={{ color: '#64748b', fontSize: '0.88rem' }}>
@@ -581,17 +588,12 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
             </Button>
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.4fr) minmax(240px, 1fr)',
-            gap: '2rem',
-            alignItems: 'center'
-          }}>
+          <div className="responsive-2col" style={{ alignItems: 'center' }}>
             {/* Floor Plan Diagram Illustration */}
             <div style={{
               backgroundColor: '#f8fafc',
               borderRadius: '14px',
-              padding: '1.5rem',
+              padding: '1.25rem',
               border: '1.5px dashed #cbd5e1',
               textAlign: 'center'
             }}>
@@ -612,10 +614,10 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
             </div>
 
             {/* Metrics Breakdown Cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <div style={{
                 backgroundColor: '#f8fafc',
-                padding: '1rem 1.25rem',
+                padding: '0.9rem 1.15rem',
                 borderRadius: '12px',
                 border: '1px solid #e2e8f0',
                 display: 'flex',
@@ -631,7 +633,7 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
 
               <div style={{
                 backgroundColor: '#f8fafc',
-                padding: '1rem 1.25rem',
+                padding: '0.9rem 1.15rem',
                 borderRadius: '12px',
                 border: '1px solid #e2e8f0',
                 display: 'flex',
@@ -648,7 +650,7 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
               {/* Natural Light Box */}
               <div style={{
                 backgroundColor: '#fffbeb',
-                padding: '1.2rem',
+                padding: '1.1rem',
                 borderRadius: '12px',
                 border: '1px solid #fde68a'
               }}>
@@ -669,3 +671,4 @@ export default function PropertyDetailPage({ property, onBack, onOpenInquiry }) 
     </div>
   );
 }
+

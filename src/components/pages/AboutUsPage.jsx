@@ -89,15 +89,15 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
         <div style={{
           backgroundColor: '#ffffff',
           borderRadius: '20px',
-          padding: 'clamp(2rem, 4vw, 3.5rem)',
+          padding: 'clamp(1.25rem, 3.5vw, 3.5rem)',
           border: '1px solid #e2e8f0',
           boxShadow: '0 10px 30px rgba(15, 23, 42, 0.04)',
           marginBottom: '3rem'
         }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '3rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: 'clamp(1.5rem, 3vw, 3rem)',
             alignItems: 'center'
           }}>
             {/* Left Content */}
@@ -118,7 +118,7 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
               </div>
 
               <h2 style={{
-                fontSize: '1.65rem',
+                fontSize: 'clamp(1.35rem, 2.5vw, 1.65rem)',
                 fontWeight: 800,
                 color: '#0f172a',
                 marginBottom: '1rem',
@@ -163,7 +163,7 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
                   alt="Luxury Residence Overview"
                   style={{
                     width: '100%',
-                    height: '380px',
+                    height: 'clamp(240px, 35vw, 380px)',
                     objectFit: 'cover',
                     display: 'block'
                   }}
@@ -173,18 +173,18 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
               {/* Floating Stat Badge */}
               <div style={{
                 position: 'absolute',
-                bottom: '-20px',
-                left: '20px',
+                bottom: '10px',
+                left: '10px',
                 backgroundColor: 'rgba(15, 23, 42, 0.92)',
                 color: '#ffffff',
-                padding: '1rem 1.4rem',
+                padding: '0.75rem 1.1rem',
                 borderRadius: '12px',
                 backdropFilter: 'blur(10px)',
                 boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
                 border: '1px solid rgba(255, 255, 255, 0.1)'
               }}>
-                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#f59e0b' }}>₹ 500+ Cr</div>
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                <div style={{ fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', fontWeight: 800, color: '#f59e0b' }}>₹ 500+ Cr</div>
+                <div style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   Luxury Assets Transacted
                 </div>
               </div>
@@ -195,20 +195,20 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
         {/* 4. Vision & Mission Cards (2 Columns) */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: '1.5rem',
           marginBottom: '3.5rem'
         }}>
           {/* Vision Card */}
           <div style={{
             backgroundColor: '#ffffff',
             borderRadius: '18px',
-            padding: '2.5rem',
+            padding: 'clamp(1.4rem, 3vw, 2.5rem)',
             border: '1px solid #e2e8f0',
             boxShadow: '0 6px 20px rgba(15, 23, 42, 0.03)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '1rem'
+            gap: '0.85rem'
           }}>
             <div style={{
               width: '46px',
@@ -223,7 +223,7 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
               <Eye size={24} />
             </div>
 
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0f172a' }}>
+            <h3 style={{ fontSize: 'clamp(1.15rem, 2vw, 1.35rem)', fontWeight: 800, color: '#0f172a' }}>
               Our Vision
             </h3>
 
@@ -236,12 +236,12 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
           <div style={{
             backgroundColor: '#ffffff',
             borderRadius: '18px',
-            padding: '2.5rem',
+            padding: 'clamp(1.4rem, 3vw, 2.5rem)',
             border: '1px solid #e2e8f0',
             boxShadow: '0 6px 20px rgba(15, 23, 42, 0.03)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '1rem'
+            gap: '0.85rem'
           }}>
             <div style={{
               width: '46px',
@@ -256,7 +256,7 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
               <Compass size={24} />
             </div>
 
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0f172a' }}>
+            <h3 style={{ fontSize: 'clamp(1.15rem, 2vw, 1.35rem)', fontWeight: 800, color: '#0f172a' }}>
               Our Mission
             </h3>
 
@@ -267,7 +267,7 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
         </div>
 
         {/* 5. Core Values Section (3 Columns) */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(2.5rem, 5vw, 3.5rem)' }}>
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -281,7 +281,7 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
           }}>
             <Sparkles size={18} /> Our Core Values
           </div>
-          <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2rem)', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem' }}>
             Principles That Guide Every Transaction
           </h2>
           <p style={{ color: '#64748b', fontSize: '0.95rem', maxWidth: '600px', margin: '0 auto 2.5rem auto' }}>
@@ -290,15 +290,15 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 270px), 1fr))',
+            gap: 'clamp(1.2rem, 2.5vw, 2rem)',
             textAlign: 'left'
           }}>
             {/* Value 1 */}
             <div style={{
               backgroundColor: '#ffffff',
               borderRadius: '16px',
-              padding: '2.2rem',
+              padding: 'clamp(1.4rem, 2.5vw, 2.2rem)',
               border: '1px solid #e2e8f0',
               boxShadow: '0 4px 18px rgba(15, 23, 42, 0.03)'
             }}>
@@ -327,7 +327,7 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
             <div style={{
               backgroundColor: '#ffffff',
               borderRadius: '16px',
-              padding: '2.2rem',
+              padding: 'clamp(1.4rem, 2.5vw, 2.2rem)',
               border: '1px solid #e2e8f0',
               boxShadow: '0 4px 18px rgba(15, 23, 42, 0.03)'
             }}>
@@ -348,7 +348,7 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
                 Institutional Diligence
               </h4>
               <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.65, margin: 0 }}>
-                We apply civil engineering and banking due-diligence benchmarks to assess spatial layouts, structural durability, natural light scores, and long-term capital appreciation potential.
+                Every luxury residence represented undergoes structural audits, legal encumbrance checks, and RERA compliance verification through our dedicated corporate team.
               </p>
             </div>
 
@@ -356,7 +356,7 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
             <div style={{
               backgroundColor: '#ffffff',
               borderRadius: '16px',
-              padding: '2.2rem',
+              padding: 'clamp(1.4rem, 2.5vw, 2.2rem)',
               border: '1px solid #e2e8f0',
               boxShadow: '0 4px 18px rgba(15, 23, 42, 0.03)'
             }}>
@@ -374,39 +374,43 @@ export default function AboutUsPage({ onBack, onOpenInquiry }) {
                 <Users size={22} />
               </div>
               <h4 style={{ fontSize: '1.18rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.65rem' }}>
-                Customer-First Fiduciary
+                Client-First Fiduciary
               </h4>
               <p style={{ fontSize: '0.9rem', color: '#64748b', lineHeight: 1.65, margin: 0 }}>
-                Every decision begins with understanding the specific aspirations and wealth goals of our clients, safeguarding their financial interests and strictly honoring client privacy.
+                We operate as confidential advisors, not high-pressure brokers. We align our success exclusively with safeguarding our clients' long-term capital and lifestyle prosperity.
               </p>
             </div>
           </div>
         </div>
 
-        {/* 6. Bottom Advisory CTA Banner (Warm Luxury Project Theme) */}
+        {/* 6. Bottom Advisory CTA Banner */}
         <div style={{
-          background: 'linear-gradient(135deg, #fffcf6 0%, #fef3c7 50%, #fff7ed 100%)',
+          background: 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fff7ed 100%)',
           borderRadius: '20px',
-          padding: 'clamp(2.5rem, 5vw, 3.5rem)',
+          padding: 'clamp(2rem, 4vw, 3.5rem) clamp(1.2rem, 4vw, 2.5rem)',
+          border: '1px solid rgba(217, 119, 6, 0.3)',
+          boxShadow: '0 16px 36px rgba(217, 119, 6, 0.08)',
           textAlign: 'center',
-          position: 'relative',
-          overflow: 'hidden',
-          border: '1.5px solid #fde68a',
-          boxShadow: '0 16px 36px rgba(217, 119, 6, 0.08)'
+          maxWidth: '850px',
+          margin: '0 auto'
         }}>
-          <div style={{ position: 'relative', zIndex: 1, maxWidth: '640px', margin: '0 auto' }}>
-            <h3 style={{ fontSize: '1.9rem', fontWeight: 800, marginBottom: '0.85rem', color: '#0f172a', letterSpacing: '-0.02em' }}>
-              Experience the Flats n Beyond Advisory Standard
-            </h3>
-            <p style={{ color: '#475569', fontSize: '0.98rem', lineHeight: 1.65, marginBottom: '2rem' }}>
-              Connect with our senior luxury property advisors for an exclusive consultation on off-market penthouses, developer launches, or secondary acquisitions.
-            </p>
+          <h3 style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', letterSpacing: '-0.02em' }}>
+            Experience the New Benchmark in Luxury Real Estate
+          </h3>
+          <p style={{ color: '#475569', fontSize: 'clamp(0.92rem, 1.5vw, 1.02rem)', marginBottom: '1.75rem', maxWidth: '600px', margin: '0 auto 1.75rem auto' }}>
+            Whether buying your dream penthouse, selling a high-value property, or transforming interiors, our senior partners are ready to assist.
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
+            <Button variant="gold" size="lg" onClick={() => onOpenInquiry(null)}>
+              Request Consultation <ArrowUpRight size={18} />
+            </Button>
             <Button
-              variant="gold"
+              variant="outline"
               size="lg"
-              onClick={() => onOpenInquiry({ title: 'Advisory Consultation Request' })}
+              onClick={() => onOpenInquiry({ title: 'Download Corporate Profile' })}
+              style={{ color: '#0f172a', borderColor: '#cbd5e1', backgroundColor: '#ffffff' }}
             >
-              Schedule Advisory Consultation <ArrowUpRight size={18} />
+              Download Corporate Dossier
             </Button>
           </div>
         </div>

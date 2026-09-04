@@ -8,13 +8,13 @@ export default function PrivacyPolicyPage({ onBack }) {
       <div style={{
         backgroundColor: '#ffffff',
         borderBottom: '1px solid #e2e8f0',
-        padding: '0.9rem 0',
+        padding: '0.75rem 0',
         position: 'sticky',
         top: '75px',
         zIndex: 40,
         boxShadow: '0 2px 10px rgba(15, 23, 42, 0.03)'
       }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
           <button
             onClick={onBack}
             style={{
@@ -49,18 +49,18 @@ export default function PrivacyPolicyPage({ onBack }) {
         </div>
       </div>
 
-      <div className="container" style={{ paddingTop: '2.5rem', maxWidth: '860px' }}>
+      <div className="container" style={{ paddingTop: 'clamp(1.5rem, 3vw, 2.5rem)', maxWidth: '860px' }}>
         <div style={{
           backgroundColor: '#ffffff',
           borderRadius: '20px',
-          padding: 'clamp(2rem, 4vw, 3.5rem)',
+          padding: 'clamp(1.25rem, 3.5vw, 3.5rem)',
           border: '1px solid #e2e8f0',
           boxShadow: '0 4px 25px rgba(15, 23, 42, 0.04)'
         }}>
           {/* Header */}
-          <div style={{ marginBottom: '2.5rem', borderBottom: '1px solid #f1f5f9', paddingBottom: '1.5rem' }}>
+          <div style={{ marginBottom: '2rem', borderBottom: '1px solid #f1f5f9', paddingBottom: '1.25rem' }}>
             <h1 style={{
-              fontSize: '2.2rem',
+              fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)',
               fontWeight: 800,
               color: '#0f172a',
               fontFamily: 'Outfit, sans-serif',

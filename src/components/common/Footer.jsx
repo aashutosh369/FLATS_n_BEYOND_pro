@@ -5,8 +5,8 @@ export default function Footer({ onOpenInquiry, onNavigate }) {
     <footer style={{
       background: 'linear-gradient(180deg, #fefbf6 0%, #f7efe1 100%)',
       color: '#44403c',
-      paddingTop: '3.5rem',
-      paddingBottom: '2.5rem',
+      paddingTop: 'clamp(2.5rem, 5vw, 3.5rem)',
+      paddingBottom: '2rem',
       position: 'relative',
       overflow: 'hidden',
       borderTop: '1px solid #ebdcc4'
@@ -14,11 +14,11 @@ export default function Footer({ onOpenInquiry, onNavigate }) {
       {/* Architectural Skyscraper Watermark Silhouette */}
       <div style={{
         position: 'absolute',
-        right: '3%',
+        right: '2%',
         bottom: '0',
-        width: '320px',
-        height: '420px',
-        opacity: 0.18,
+        width: 'clamp(180px, 25vw, 320px)',
+        height: 'clamp(240px, 35vw, 420px)',
+        opacity: 0.15,
         pointerEvents: 'none',
         userSelect: 'none',
         zIndex: 0
@@ -61,10 +61,7 @@ export default function Footer({ onOpenInquiry, onNavigate }) {
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)',
-          gap: '3.5rem',
+        <div className="responsive-2col" style={{
           alignItems: 'start',
           paddingBottom: '2.5rem',
           borderBottom: '1px solid #ebdcc4'
@@ -92,7 +89,7 @@ export default function Footer({ onOpenInquiry, onNavigate }) {
                 }}
               />
               <div>
-                <div style={{ fontSize: '1.45rem', fontWeight: 800, color: '#1c1917', letterSpacing: '0.02em', fontFamily: 'Outfit, sans-serif' }}>
+                <div style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.45rem)', fontWeight: 800, color: '#1c1917', letterSpacing: '0.02em', fontFamily: 'Outfit, sans-serif' }}>
                   FLATS <span style={{ color: '#d97706' }}>n</span> BEYOND
                 </div>
                 <div style={{
@@ -118,12 +115,12 @@ export default function Footer({ onOpenInquiry, onNavigate }) {
           </div>
 
           {/* Right: Quick Links & Social */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            {/* 2x2 Grid of Links matching screenshot */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+            {/* 2x2 Grid of Links */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-              gap: '1.2rem 2.5rem'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+              gap: '1rem 1.5rem'
             }}>
               <button
                 onClick={() => onNavigate ? onNavigate('about') : null}
@@ -280,3 +277,4 @@ export default function Footer({ onOpenInquiry, onNavigate }) {
     </footer>
   );
 }
+

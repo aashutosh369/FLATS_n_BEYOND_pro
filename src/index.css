@@ -1,6 +1,6 @@
 /* =========================================================
-   FLATS N BEYOND - LUXURY DESIGN SYSTEM
-   Inspired by Openhouse & Elite Real Estate Advisory
+   FLATS N BEYOND - LUXURY RESPONSIVE DESIGN SYSTEM
+   Optimized for Mobile, Tablet, Laptop, Mac & Large 4K Screens
    ========================================================= */
 
 :root {
@@ -10,6 +10,7 @@
   --primary-700: #334155;
   --accent-gold: #d97706;  /* Luxury Gold / Amber */
   --accent-gold-hover: #b45309;
+  --accent-gold-light: #fffbeb;
   --accent-teal: #0d9488;  /* Trust Emerald/Teal */
   --accent-teal-light: #f0fdf4;
   --accent-blue: #2563eb;
@@ -60,6 +61,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -68,7 +70,10 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -88,30 +93,35 @@ button {
   border: none;
   background: none;
   font-family: inherit;
+  touch-action: manipulation;
+}
+
+input, select, textarea {
+  font-family: inherit;
 }
 
 img {
   max-width: 100%;
   height: auto;
   display: block;
-  content-visibility: auto;
 }
 
-/* Utility Containers */
+/* Fluid Container with Responsive Padding */
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1320px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: clamp(1rem, 3.5vw, 2.5rem);
+  padding-right: clamp(1rem, 3.5vw, 2.5rem);
 }
 
 /* Glassmorphism Header */
 .glass-nav {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
 }
 
 /* Typography Helpers */
@@ -174,6 +184,7 @@ img {
   border-radius: var(--radius-md);
   transition: var(--transition-normal);
   white-space: nowrap;
+  user-select: none;
 }
 
 .btn-primary {
@@ -216,15 +227,25 @@ img {
 }
 
 .btn-lg {
-  padding: 1rem 2rem;
-  font-size: 1.05rem;
+  padding: 0.9rem 1.75rem;
+  font-size: 1rem;
   border-radius: var(--radius-lg);
 }
 
 /* Keyframe Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }
 
 @keyframes pulseGlow {
@@ -233,7 +254,7 @@ img {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-pulse-slow {
@@ -242,7 +263,8 @@ img {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
@@ -254,3 +276,94 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+/* Hide scrollbar utility for touch horizontal scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* =========================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================= */
+
+/* Desktop Navigation vs Mobile Hamburger */
+.desktop-nav {
+  display: flex !important;
+}
+
+.desktop-action-btn {
+  display: inline-flex !important;
+}
+
+.mobile-menu-btn {
+  display: none !important;
+}
+
+@media (max-width: 960px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  .desktop-action-btn {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Two Column Responsive Grids */
+.responsive-2col {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 2.5rem;
+}
+
+@media (max-width: 860px) {
+  .responsive-2col {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+/* Card Responsive Grid */
+.responsive-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 640px) {
+  .responsive-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* Section Spacing on Mobile vs Desktop */
+@media (max-width: 768px) {
+  section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important;
+  }
+  
+  .btn-lg {
+    padding: 0.8rem 1.4rem;
+    font-size: 0.92rem;
+  }
+}
+

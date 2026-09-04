@@ -22,7 +22,8 @@ export default function PropertyCard({ property, onSelectProperty, onEnquire }) 
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         display: 'flex',
         flexDirection: 'column',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        width: '100%'
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-6px)';
@@ -39,7 +40,7 @@ export default function PropertyCard({ property, onSelectProperty, onEnquire }) 
       <div
         style={{
           position: 'relative',
-          height: '240px',
+          height: 'clamp(200px, 26vw, 240px)',
           width: '100%',
           overflow: 'hidden',
           backgroundColor: '#0f172a'
@@ -65,21 +66,21 @@ export default function PropertyCard({ property, onSelectProperty, onEnquire }) 
         <div
           style={{
             position: 'absolute',
-            top: '1rem',
-            left: '1rem',
+            top: '0.85rem',
+            left: '0.85rem',
             backgroundColor: 'rgba(255, 255, 255, 0.92)',
             color: '#0f172a',
             border: '1px solid rgba(255, 255, 255, 0.95)',
-            fontSize: '0.78rem',
+            fontSize: '0.75rem',
             fontWeight: 700,
-            padding: '0.35rem 0.85rem',
+            padding: '0.3rem 0.75rem',
             borderRadius: '9999px',
             boxShadow: '0 4px 14px rgba(0, 0, 0, 0.08)',
             letterSpacing: '0.02em',
             backdropFilter: 'blur(8px)',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.4rem'
+            gap: '0.35rem'
           }}
         >
           <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#10b981' }} />
@@ -88,24 +89,25 @@ export default function PropertyCard({ property, onSelectProperty, onEnquire }) 
       </div>
 
       {/* Property Information Body */}
-      <div style={{ padding: '1.4rem 1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+      <div style={{ padding: 'clamp(1.1rem, 2vw, 1.4rem) clamp(1.1rem, 2vw, 1.5rem)', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         {/* Title & Price Header */}
         <div style={{ marginBottom: '0.85rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.35rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.35rem', flexWrap: 'wrap' }}>
             <h3
               style={{
-                fontSize: '1.15rem',
-                fontWeight: 650,
+                fontSize: 'clamp(1.05rem, 1.5vw, 1.15rem)',
+                fontWeight: 700,
                 color: '#1e293b',
                 lineHeight: 1.35,
-                margin: 0
+                margin: 0,
+                flex: '1 1 180px'
               }}
             >
               {property.title}
             </h3>
             <div
               style={{
-                fontSize: '1.3rem',
+                fontSize: 'clamp(1.15rem, 1.8vw, 1.3rem)',
                 fontWeight: 800,
                 color: '#d97706',
                 whiteSpace: 'nowrap',
@@ -126,52 +128,52 @@ export default function PropertyCard({ property, onSelectProperty, onEnquire }) 
               fontSize: '0.86rem'
             }}
           >
-            <MapPin size={14} color="#d97706" />
-            <span>{property.location}</span>
+            <MapPin size={14} color="#d97706" style={{ flexShrink: 0 }} />
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{property.location}</span>
           </div>
         </div>
 
-        {/* Configuration Pills Row (BHK, Area, Unit) with Elegant Soft Color Theme */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-          {/* BHK - Warm Gold Pill */}
+        {/* Configuration Pills Row (BHK, Area, Unit) */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.9rem', flexWrap: 'wrap' }}>
+          {/* BHK */}
           <span
             style={{
               backgroundColor: '#fffbeb',
               color: '#b45309',
               border: '1px solid #fde68a',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               fontWeight: 650,
-              padding: '0.25rem 0.65rem',
+              padding: '0.22rem 0.6rem',
               borderRadius: '6px'
             }}
           >
             {property.bhk}
           </span>
 
-          {/* Area - Soft Sky Blue Pill */}
+          {/* Area */}
           <span
             style={{
               backgroundColor: '#eff6ff',
               color: '#1e40af',
               border: '1px solid #dbeafe',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               fontWeight: 600,
-              padding: '0.25rem 0.65rem',
+              padding: '0.22rem 0.6rem',
               borderRadius: '6px'
             }}
           >
             {property.sqft}
           </span>
 
-          {/* Unit - Soft Lavender / Indigo Pill */}
+          {/* Unit */}
           <span
             style={{
               backgroundColor: '#f5f3ff',
               color: '#6d28d9',
               border: '1px solid #ede9fe',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               fontWeight: 500,
-              padding: '0.25rem 0.65rem',
+              padding: '0.22rem 0.6rem',
               borderRadius: '6px'
             }}
           >
@@ -184,8 +186,8 @@ export default function PropertyCard({ property, onSelectProperty, onEnquire }) 
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.45rem',
-            marginBottom: '1.25rem',
+            gap: '0.35rem',
+            marginBottom: '1.1rem',
             flexWrap: 'wrap'
           }}
         >
@@ -194,18 +196,18 @@ export default function PropertyCard({ property, onSelectProperty, onEnquire }) 
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.35rem',
-              fontSize: '0.75rem',
+              gap: '0.3rem',
+              fontSize: '0.74rem',
               fontWeight: 600,
               backgroundColor: '#fffbeb',
               color: '#92400e',
               border: '1px solid #fef3c7',
-              padding: '0.3rem 0.65rem',
+              padding: '0.25rem 0.55rem',
               borderRadius: '9999px',
               whiteSpace: 'nowrap'
             }}
           >
-            <Sun size={13} color="#d97706" />
+            <Sun size={12} color="#d97706" />
             <span>Sunlight {property.sunlight}</span>
           </span>
 
@@ -214,18 +216,18 @@ export default function PropertyCard({ property, onSelectProperty, onEnquire }) 
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.35rem',
-              fontSize: '0.75rem',
+              gap: '0.3rem',
+              fontSize: '0.74rem',
               fontWeight: 600,
               backgroundColor: '#eff6ff',
               color: '#1e40af',
               border: '1px solid #dbeafe',
-              padding: '0.3rem 0.65rem',
+              padding: '0.25rem 0.55rem',
               borderRadius: '9999px',
               whiteSpace: 'nowrap'
             }}
           >
-            <Bus size={13} color="#2563eb" />
+            <Bus size={12} color="#2563eb" />
             <span>Transit {property.transit}</span>
           </span>
 
@@ -234,82 +236,83 @@ export default function PropertyCard({ property, onSelectProperty, onEnquire }) 
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.35rem',
-              fontSize: '0.75rem',
+              gap: '0.3rem',
+              fontSize: '0.74rem',
               fontWeight: 600,
               backgroundColor: '#f0fdf4',
               color: '#166534',
               border: '1px solid #dcfce7',
-              padding: '0.3rem 0.65rem',
+              padding: '0.25rem 0.55rem',
               borderRadius: '9999px',
               whiteSpace: 'nowrap'
             }}
           >
-            <Building2 size={13} color="#16a34a" />
+            <Building2 size={12} color="#16a34a" />
             <span>Locality {property.locality}</span>
           </span>
         </div>
 
         {/* Divider */}
-        <div style={{ height: '1px', backgroundColor: '#f1f5f9', marginBottom: '1.1rem' }} />
+        <div style={{ height: '1px', backgroundColor: '#f1f5f9', marginBottom: '1rem', marginTop: 'auto' }} />
 
         {/* Bottom 5-Column Specs Grid */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(5, 1fr)',
-            gap: '0.35rem',
+            gap: '0.25rem',
             textAlign: 'center'
           }}
         >
           {/* Baths */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.35rem', border: '1px solid #f1f5f9' }}>
-              <ShowerHead size={16} color="#d97706" />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 0 }}>
+            <div style={{ width: '30px', height: '30px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.3rem', border: '1px solid #f1f5f9' }}>
+              <ShowerHead size={15} color="#d97706" />
             </div>
-            <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#0f172a' }}>{property.baths}</div>
-            <div style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 500 }}>Baths</div>
+            <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0f172a' }}>{property.baths}</div>
+            <div style={{ fontSize: '0.68rem', color: '#64748b', fontWeight: 500 }}>Baths</div>
           </div>
 
           {/* Balcony */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.35rem', border: '1px solid #f1f5f9' }}>
-              <Trees size={16} color="#d97706" />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 0 }}>
+            <div style={{ width: '30px', height: '30px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.3rem', border: '1px solid #f1f5f9' }}>
+              <Trees size={15} color="#d97706" />
             </div>
-            <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#0f172a' }}>{property.balcony}</div>
-            <div style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 500 }}>Balcony</div>
+            <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0f172a' }}>{property.balcony}</div>
+            <div style={{ fontSize: '0.68rem', color: '#64748b', fontWeight: 500 }}>Balcony</div>
           </div>
 
           {/* Floor */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.35rem', border: '1px solid #f1f5f9' }}>
-              <Layers size={16} color="#d97706" />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 0 }}>
+            <div style={{ width: '30px', height: '30px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.3rem', border: '1px solid #f1f5f9' }}>
+              <Layers size={15} color="#d97706" />
             </div>
-            <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#0f172a' }}>{property.floor}</div>
-            <div style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 500 }}>Floor</div>
+            <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0f172a' }}>{property.floor}</div>
+            <div style={{ fontSize: '0.68rem', color: '#64748b', fontWeight: 500 }}>Floor</div>
           </div>
 
           {/* Parking */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.35rem', border: '1px solid #f1f5f9' }}>
-              <CarFront size={16} color="#d97706" />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 0 }}>
+            <div style={{ width: '30px', height: '30px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.3rem', border: '1px solid #f1f5f9' }}>
+              <CarFront size={15} color="#d97706" />
             </div>
-            <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#0f172a' }}>{property.parking}</div>
-            <div style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 500 }}>Parking</div>
+            <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0f172a' }}>{property.parking}</div>
+            <div style={{ fontSize: '0.68rem', color: '#64748b', fontWeight: 500 }}>Parking</div>
           </div>
 
           {/* Facing */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.35rem', border: '1px solid #f1f5f9' }}>
-              <Navigation2 size={16} color="#d97706" />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 0 }}>
+            <div style={{ width: '30px', height: '30px', borderRadius: '8px', backgroundColor: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.3rem', border: '1px solid #f1f5f9' }}>
+              <Navigation2 size={15} color="#d97706" />
             </div>
-            <div style={{ fontSize: '0.78rem', fontWeight: 800, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%' }}>
+            <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%' }}>
               {property.facing}
             </div>
-            <div style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 500 }}>Facing</div>
+            <div style={{ fontSize: '0.68rem', color: '#64748b', fontWeight: 500 }}>Facing</div>
           </div>
         </div>
       </div>
     </div>
   );
 }
+

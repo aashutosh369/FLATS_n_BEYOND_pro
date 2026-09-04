@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Building2, Sparkles, Menu, X, ArrowUpRight, ChevronDown, Key, RefreshCw, Home } from 'lucide-react';
+import { Sparkles, Menu, X, ArrowUpRight, ChevronDown, Key, RefreshCw, Home, PhoneCall } from 'lucide-react';
 import Button from './Button';
 
 export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [mobileServicesExpanded, setMobileServicesExpanded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +15,18 @@ export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent background scrolling when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
 
   const serviceItems = [
     {
@@ -52,6 +65,7 @@ export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) 
 
   const handleServiceClick = (item) => {
     setServicesDropdownOpen(false);
+    setMobileMenuOpen(false);
     if (onNavigate) {
       onNavigate('home');
     }
@@ -66,6 +80,13 @@ export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) 
     }, 100);
   };
 
+  const handleNavToPage = (pageName) => {
+    setMobileMenuOpen(false);
+    if (onNavigate) {
+      onNavigate(pageName);
+    }
+  };
+
   return (
     <header className="glass-nav" style={{
       position: 'sticky',
@@ -74,33 +95,34 @@ export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) 
       transition: 'all 0.3s ease',
       boxShadow: scrolled ? '0 10px 30px rgba(15, 23, 42, 0.08)' : 'none'
     }}>
-      {/* Main Header Bar - Full Width */}
+      {/* Main Header Bar */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         height: '75px',
         width: '100%',
-        paddingLeft: 'clamp(1.5rem, 4vw, 3.5rem)',
-        paddingRight: 'clamp(1.5rem, 4vw, 3.5rem)'
+        paddingLeft: 'clamp(1rem, 3.5vw, 3rem)',
+        paddingRight: 'clamp(1rem, 3.5vw, 3rem)'
       }}>
         {/* Brand Logo */}
         <a 
           href="#" 
           onClick={(e) => {
             e.preventDefault();
+            setMobileMenuOpen(false);
             if (onNavigate) onNavigate('home');
             else if (onSelectCategory) onSelectCategory('All');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', textDecoration: 'none', flexShrink: 0 }}
         >
           <img
             src="/logo.jpg"
             alt="Flats n Beyond Logo"
             style={{
-              height: '52px',
-              width: '52px',
+              height: 'clamp(42px, 5vw, 50px)',
+              width: 'clamp(42px, 5vw, 50px)',
               borderRadius: '50%',
               objectFit: 'cover',
               border: '2px solid #d97706',
@@ -109,16 +131,17 @@ export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) 
           />
           <div>
             <div style={{
-              fontSize: '1.35rem',
+              fontSize: 'clamp(1.15rem, 2.2vw, 1.35rem)',
               fontWeight: 800,
               letterSpacing: '-0.02em',
               color: '#0f172a',
-              fontFamily: 'Outfit, sans-serif'
+              fontFamily: 'Outfit, sans-serif',
+              lineHeight: 1.15
             }}>
               FLATS <span style={{ color: '#d97706' }}>n</span> BEYOND
             </div>
             <div style={{
-              fontSize: '0.62rem',
+              fontSize: 'clamp(0.55rem, 1vw, 0.62rem)',
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
               color: '#64748b',
@@ -259,28 +282,223 @@ export default function Header({ onOpenInquiry, onSelectCategory, onNavigate }) 
           </button>
         </nav>
 
-        {/* Action Buttons */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <Button variant="gold" onClick={() => onOpenInquiry(null)}>
-            Schedule Advisory <ArrowUpRight size={16} />
-          </Button>
+        {/* Action Buttons & Mobile Trigger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="desktop-action-btn">
+            <Button variant="gold" onClick={() => onOpenInquiry(null)}>
+              Schedule Advisory <ArrowUpRight size={16} />
+            </Button>
+          </div>
 
           {/* Mobile menu trigger button */}
           <button
             className="mobile-menu-btn"
+            aria-label="Toggle mobile menu"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{
-              display: 'none',
-              padding: '0.5rem',
-              border: '1px solid #e2e8f0',
-              borderRadius: '8px',
-              color: '#0f172a'
+              padding: '0.55rem',
+              backgroundColor: mobileMenuOpen ? '#fffbeb' : '#f8fafc',
+              border: '1.5px solid #cbd5e1',
+              borderRadius: '10px',
+              color: '#0f172a',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
             }}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={24} color="#d97706" /> : <Menu size={24} />}
           </button>
         </div>
       </div>
+
+      {/* =========================================================
+          MOBILE NAVIGATION DRAWER & BACKDROP OVERLAY
+         ========================================================= */}
+      {mobileMenuOpen && (
+        <div style={{
+          position: 'fixed',
+          top: '75px',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(15, 23, 42, 0.65)',
+          backdropFilter: 'blur(6px)',
+          zIndex: 99,
+          display: 'flex',
+          flexDirection: 'column',
+          animation: 'fadeIn 0.2s ease-out'
+        }}>
+          {/* Drawer Menu Content */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            borderBottom: '2px solid #e2e8f0',
+            maxHeight: 'calc(100vh - 85px)',
+            overflowY: 'auto',
+            padding: '1.5rem',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+            animation: 'slideDown 0.25s ease-out'
+          }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {/* Home Link */}
+              <button
+                onClick={() => handleNavToPage('home')}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '0.85rem 1rem',
+                  borderRadius: '10px',
+                  fontWeight: 700,
+                  fontSize: '1.05rem',
+                  color: '#0f172a',
+                  backgroundColor: '#f8fafc',
+                  textAlign: 'left'
+                }}
+              >
+                Home
+              </button>
+
+              {/* Mobile Services Accordion */}
+              <div style={{
+                borderRadius: '10px',
+                border: '1px solid #e2e8f0',
+                overflow: 'hidden'
+              }}>
+                <button
+                  onClick={() => setMobileServicesExpanded(!mobileServicesExpanded)}
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '0.85rem 1rem',
+                    fontWeight: 700,
+                    fontSize: '1.05rem',
+                    color: '#0f172a',
+                    backgroundColor: mobileServicesExpanded ? '#fffbeb' : '#ffffff'
+                  }}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    Services
+                  </span>
+                  <ChevronDown
+                    size={18}
+                    color="#d97706"
+                    style={{
+                      transform: mobileServicesExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.2s'
+                    }}
+                  />
+                </button>
+
+                {mobileServicesExpanded && (
+                  <div style={{
+                    padding: '0.5rem',
+                    backgroundColor: '#fafaf9',
+                    borderTop: '1px solid #e2e8f0',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.35rem'
+                  }}>
+                    {serviceItems.map((item, idx) => {
+                      const Icon = item.icon;
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => handleServiceClick(item)}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.75rem',
+                            padding: '0.75rem',
+                            borderRadius: '8px',
+                            backgroundColor: '#ffffff',
+                            border: '1px solid #f1f5f9',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          <div style={{
+                            padding: '0.4rem',
+                            borderRadius: '8px',
+                            backgroundColor: '#f1f5f9',
+                            color: item.color
+                          }}>
+                            <Icon size={16} />
+                          </div>
+                          <div>
+                            <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0f172a' }}>
+                              {item.title}
+                            </div>
+                            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                              {item.subtitle}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* About Us */}
+              <button
+                onClick={() => handleNavToPage('about')}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '0.85rem 1rem',
+                  borderRadius: '10px',
+                  fontWeight: 700,
+                  fontSize: '1.05rem',
+                  color: '#0f172a',
+                  backgroundColor: '#f8fafc',
+                  textAlign: 'left'
+                }}
+              >
+                About Us
+              </button>
+
+              {/* Contact Us */}
+              <button
+                onClick={() => handleNavToPage('contact')}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '0.85rem 1rem',
+                  borderRadius: '10px',
+                  fontWeight: 700,
+                  fontSize: '1.05rem',
+                  color: '#0f172a',
+                  backgroundColor: '#f8fafc',
+                  textAlign: 'left'
+                }}
+              >
+                Contact Us
+              </button>
+
+              {/* Direct Advisory CTA Button for Mobile */}
+              <div style={{ marginTop: '1rem' }}>
+                <Button
+                  variant="gold"
+                  size="lg"
+                  fullWidth
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenInquiry(null);
+                  }}
+                >
+                  <PhoneCall size={18} style={{ marginRight: '0.5rem' }} /> Schedule Advisory
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Backdrop Click Dismiss */}
+          <div 
+            style={{ flexGrow: 1 }} 
+            onClick={() => setMobileMenuOpen(false)} 
+          />
+        </div>
+      )}
     </header>
   );
 }
+

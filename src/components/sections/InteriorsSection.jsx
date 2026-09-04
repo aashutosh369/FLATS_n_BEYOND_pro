@@ -1,20 +1,14 @@
 import React from 'react';
 import { interiorProjects } from '../../data/mockProperties';
-import { Sparkles, CheckCircle, Palette, Home, Shield, ArrowRight } from 'lucide-react';
+import { Sparkles, CheckCircle, ArrowRight } from 'lucide-react';
 import Button from '../common/Button';
 
 export default function InteriorsSection({ onOpenInquiry }) {
   return (
-    <section id="interiors" style={{ padding: '5.5rem 0', backgroundColor: '#ffffff', borderTop: '1px solid #e2e8f0' }}>
+    <section id="interiors" style={{ padding: 'clamp(3rem, 6vw, 5.5rem) 0', backgroundColor: '#ffffff', borderTop: '1px solid #e2e8f0' }}>
       <div className="container">
-        {/* Header */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2.5rem',
-          alignItems: 'center',
-          marginBottom: '4rem'
-        }}>
+        {/* Header Responsive 2-Col */}
+        <div className="responsive-2col" style={{ alignItems: 'center', marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}>
           <div>
             <div style={{
               display: 'inline-flex',
@@ -24,7 +18,7 @@ export default function InteriorsSection({ onOpenInquiry }) {
               color: '#0d9488',
               padding: '0.35rem 0.85rem',
               borderRadius: '9999px',
-              fontSize: '0.8rem',
+              fontSize: 'clamp(0.72rem, 1.2vw, 0.8rem)',
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
@@ -33,10 +27,10 @@ export default function InteriorsSection({ onOpenInquiry }) {
             }}>
               <Sparkles size={14} /> New Vertical • Designing Homes
             </div>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', lineHeight: 1.2, marginBottom: '1rem' }}>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 3.8vw, 2.5rem)', fontWeight: 800, color: '#0f172a', lineHeight: 1.2, marginBottom: '1rem' }}>
               Turn Bare Shells into Bespoke Masterpieces.
             </h2>
-            <p style={{ color: '#64748b', fontSize: '1.05rem', lineHeight: 1.6 }}>
+            <p style={{ color: '#64748b', fontSize: 'clamp(0.92rem, 1.5vw, 1.05rem)', lineHeight: 1.6 }}>
               Beyond real estate acquisition, our in-house luxury design studio curates turnkey interiors tailored for luxury apartments, penthouses, and villa estates.
             </p>
           </div>
@@ -44,11 +38,11 @@ export default function InteriorsSection({ onOpenInquiry }) {
           <div style={{
             backgroundColor: '#f8fafc',
             borderRadius: '16px',
-            padding: '2rem',
+            padding: 'clamp(1.25rem, 3vw, 2rem)',
             border: '1px solid #e2e8f0',
             boxShadow: '0 10px 25px rgba(15, 23, 42, 0.05)'
           }}>
-            <h4 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.75rem' }}>
+            <h4 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.2rem)', fontWeight: 700, color: '#0f172a', marginBottom: '0.75rem' }}>
               Book an Interior Advisory Session
             </h4>
             <p style={{ fontSize: '0.88rem', color: '#64748b', marginBottom: '1.25rem' }}>
@@ -57,13 +51,13 @@ export default function InteriorsSection({ onOpenInquiry }) {
 
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.85rem', color: '#334155', marginBottom: '1.5rem' }}>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <CheckCircle size={16} color="#0d9488" /> 3D VR Spatial Walkthroughs
+                <CheckCircle size={16} color="#0d9488" style={{ flexShrink: 0 }} /> 3D VR Spatial Walkthroughs
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <CheckCircle size={16} color="#0d9488" /> Imported Italian & German Hardware
+                <CheckCircle size={16} color="#0d9488" style={{ flexShrink: 0 }} /> Imported Italian & German Hardware
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <CheckCircle size={16} color="#0d9488" /> Turnkey Delivery within 90 Days
+                <CheckCircle size={16} color="#0d9488" style={{ flexShrink: 0 }} /> Turnkey Delivery within 90 Days
               </li>
             </ul>
 
@@ -76,8 +70,8 @@ export default function InteriorsSection({ onOpenInquiry }) {
         {/* Portfolio Showcase Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: 'clamp(1.25rem, 3vw, 2rem)'
         }}>
           {interiorProjects.map((item) => (
             <div
@@ -93,7 +87,7 @@ export default function InteriorsSection({ onOpenInquiry }) {
               onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-6px)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
-              <div style={{ height: '240px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ height: 'clamp(190px, 25vw, 240px)', position: 'relative', overflow: 'hidden' }}>
                 <img
                   src={item.image}
                   alt={item.title}
@@ -103,8 +97,8 @@ export default function InteriorsSection({ onOpenInquiry }) {
                 />
                 <span style={{
                   position: 'absolute',
-                  top: '1rem',
-                  left: '1rem',
+                  top: '0.85rem',
+                  left: '0.85rem',
                   backgroundColor: 'rgba(15, 23, 42, 0.85)',
                   color: '#ffffff',
                   fontSize: '0.75rem',
@@ -116,7 +110,7 @@ export default function InteriorsSection({ onOpenInquiry }) {
                 </span>
               </div>
 
-              <div style={{ padding: '1.5rem' }}>
+              <div style={{ padding: 'clamp(1.1rem, 2vw, 1.5rem)' }}>
                 <div style={{ fontSize: '0.8rem', color: '#0d9488', fontWeight: 600, marginBottom: '0.2rem' }}>
                   {item.location}
                 </div>
@@ -163,3 +157,4 @@ export default function InteriorsSection({ onOpenInquiry }) {
     </section>
   );
 }
+
