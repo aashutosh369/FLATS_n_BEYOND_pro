@@ -7,31 +7,36 @@ export default function HeroSection({ onSearchSubmit }) {
       id: 1,
       image: '/images/frames-for-your-heart-2d4lAQAlbDA-unsplash.jpg',
       title: "Dreams Find An Address",
-      subtitle: "Verified luxury penthouses, sky villas & premium residences."
+      subtitle: "Verified luxury penthouses, sky villas & premium residences.",
+      position: 'center 38%'
     },
     {
       id: 2,
       image: '/images/francesca-tosolini-tHkJAMcO3QE-unsplash.jpg',
       title: "Experience You'll Love",
-      subtitle: "Buying your home should feel like joy, not paperwork."
+      subtitle: "Buying your home should feel like joy, not paperwork.",
+      position: 'center 45%'
     },
     {
       id: 3,
       image: '/images/point3d-commercial-imaging-ltd-C438QF1C3eI-unsplash.jpg',
       title: "Secondary Market, Re-imagined",
-      subtitle: "Transparent resale flow with 100% verified legal title deeds."
+      subtitle: "Transparent resale flow with 100% verified legal title deeds.",
+      position: 'center 50%'
     },
     {
       id: 4,
       image: '/images/home-makers-interior-9mSYc-zKdWA-unsplash.jpg',
       title: "Designing Homes Services",
-      subtitle: "Bespoke interior architecture & turnkey luxury fit-outs."
+      subtitle: "Bespoke interior architecture & turnkey luxury fit-outs.",
+      position: 'center 40%'
     },
     {
       id: 5,
       image: '/images/filipe-freitas-rzcK5CPpmuc-unsplash.jpg',
       title: "Corporate Real Estate Advisory",
-      subtitle: "Institutional transparency and zero markup developer deals."
+      subtitle: "Institutional transparency and zero markup developer deals.",
+      position: 'center 45%'
     }
   ];
 
@@ -50,8 +55,7 @@ export default function HeroSection({ onSearchSubmit }) {
       style={{
         position: 'relative',
         height: 'calc(100vh - 75px)',
-        minHeight: '580px',
-        maxHeight: '820px',
+        minHeight: '620px',
         width: '100%',
         overflow: 'hidden',
         backgroundColor: '#090d16',
@@ -86,9 +90,8 @@ export default function HeroSection({ onSearchSubmit }) {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              transform: index === currentSlide ? 'scale(1.04)' : 'scale(1)',
-              transition: 'transform 6s ease-out',
-              willChange: 'transform'
+              objectPosition: slide.position || 'center center',
+              transition: 'opacity 1.2s ease-out'
             }}
           />
           {/* Subtle Dark Gradient Overlay for Readability */}
